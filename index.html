@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio Profesional — Desarrollador de Software Sr.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --accent: #0ea5e9;
+      --accent-2: #6366f1;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: rgba(0,0,0,0.06);
+      --shadow-hover: rgba(0,0,0,0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(180deg, #e0f2fe 0%, var(--bg) 60%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(14,165,233,0.04) 40px,
+        rgba(14,165,233,0.04) 41px
+      );
+      animation: scan 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
+    .hero-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      border: 4px solid #fff;
+      box-shadow: 0 10px 40px rgba(14,165,233,0.25);
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      z-index: 1;
+    }
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      z-index: 1;
+    }
+    .hero .tagline {
+      max-width: 700px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      z-index: 1;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      z-index: 1;
+    }
+    .badge {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .badge:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      animation: bounce 2s infinite;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      z-index: 1;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+    section { padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+    }
+    .section-title .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 1.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.3rem;
+      width: 12px;
+      height: 12px;
+      background: var(--bg);
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      transform: translateX(-5px);
+    }
+    .timeline-item .date {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-item .role {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .timeline-item .company {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+    .timeline-item ul {
+      list-style: none;
+      padding: 0;
+    }
+    .timeline-item ul li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .timeline-item ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .skill-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-hover);
+    }
+    .skill-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .skill-tag {
+      background: rgba(14,165,233,0.08);
+      color: var(--text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(14,165,233,0.2);
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .edu-card:hover {
+      border-color: var(--accent-2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px var(--shadow-hover);
+    }
+    .edu-card .year {
+      font-size: 0.8rem;
+      color: var(--accent-2);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .edu-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .edu-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .courses-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .course-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px var(--shadow);
+      color: var(--text);
+    }
+    .course-chip:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+    .course-chip .year-chip {
+      background: var(--accent-2);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .contact-bar {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .contact-bar p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .contact-bar .lang {
+      margin-top: 0.5rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .highlight-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 2px 12px var(--shadow);
+    }
+    .stat-box:hover {
+      border-color: var(--accent);
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px var(--shadow-hover);
+    }
+    .stat-box .label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .timeline { padding-left: 1.5rem; }
+      .timeline-item::before { left: -1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-avatar">TB</div>
+    <h1>Desarrollador de Software Sr.</h1>
+    <p class="subtitle">Full Stack · Infraestructura · VoIP</p>
+    <p class="tagline">
+      Más de 15 años de experiencia liderando proyectos de desarrollo web, administración de bases de datos e infraestructura tecnológica. Especialista en automatización de procesos, migraciones críticas y cumplimiento fiscal SAT 4.0.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">PHP / Laravel</span>
+      <span class="badge">Python / Django</span>
+      <span class="badge">MySQL / PostgreSQL</span>
+      <span class="badge">Linux / Windows Server / MacOS</span>
+      <span class="badge">VoIP / Asterisk</span>
+      <span class="badge">Facturación SAT 4.0</span>
+      <span class="badge">Redes & Firewalls</span>
+    </div>
+    <div class="scroll-hint">↓</div>
+  </div>
+
+  <section>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="highlight-number">15+</div>
+        <div class="label">Años de Experiencia</div>
+      </div>
+      <div class="stat-box">
+        <div class="highlight-number">8+</div>
+        <div class="label">Empresas</div>
+      </div>
+      <div class="stat-box">
+        <div class="highlight-number">20+</div>
+        <div class="label">Tecnologías</div>
+      </div>
+      <div class="stat-box">
+        <div class="highlight-number">B1</div>
+        <div class="label">Inglés</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="icon">💼</span> Experiencia Profesional</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">Agosto 2021 – Actualidad</div>
+        <div class="role">Desarrollador de Software Sr.</div>
+        <div class="company">Asociación Nacional de Actores</div>
+        <ul>
+          <li>Diseñé e implementé procesos automatizados que incrementaron significativamente la eficiencia operativa.</li>
+          <li>Responsable de la depuración, optimización y mantenimiento de la app crítica de control de aportaciones para jubilación y previsión social.</li>
+          <li>Dirigí la migración y optimización de bases de datos hacia MySQL 8, elevando estándares de seguridad y rendimiento.</li>
+          <li>Transición fluida de sistemas legados COBOL sin interrupciones operativas.</li>
+          <li>Lideré el desarrollo e integración del módulo de facturación electrónica SAT 4.0.</li>
+          <li>Administración de servidores híbridos (Linux y Windows Server) asegurando alta disponibilidad.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="date">Febrero 2019 – Actualidad</div>
+        <div class="role">Desarrollador Freelance</div>
+        <div class="company">Independiente</div>
+        <ul>
+          <li>Desarrollo Full Stack de aplicaciones web a la medida: desde levantamiento de requerimientos hasta despliegue productivo.</li>
+          <li>Arquitectura y mantenimiento con PHP (Laravel), Python (Django) y jQuery.</li>
+          <li>Gestión de bases de datos relacionales (MySQL, PostgreSQL) y configuración de servidores Linux y Windows.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="date">Junio 2009 – Mayo 2019</div>
+        <div class="role">Ingeniero de Soporte y Desarrollo</div>
+        <div class="company">EMSYS</div>
+        <ul>
+          <li>Aplicaciones web integradas con APIs de facturación electrónica y pasarelas de pago (PHP, ASP Classic, .NET, C#, Crystal Reports).</li>
+          <li>Gestión de proyectos: ERP, plataformas de Tickets y sistemas POS.</li>
+          <li>Diseño e instalación de redes estructuradas (Cat 6), servidores VPS/Datos, firewalls (pfSense) y centrales telefónicas VoIP (Asterisk, Issabel).</li>
+          <li>Consultoría, levantamiento de requerimientos y soporte técnico avanzado remoto y en sitio.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2003 – 2014</div>
+        <div class="role">Experiencia Anterior Relevante</div>
+        <div class="company">Múltiples organizaciones</div>
+        <ul>
+          <li><strong>Administrador de Sistemas de TI</strong> (2012–2014) — Infraestructura, Data Centers y seguridad de redes.</li>
+          <li><strong>Ingeniero de Soporte</strong> | Plastics MAT (2009–2012)</li>
+          <li><strong>Ejecutivo de Soporte</strong> | SACMEX (2009) — Store Procedures T-SQL y sistemas de cobro.</li>
+          <li><strong>Técnico de Soporte</strong> | Grupo Montana (2008)</li>
+          <li><strong>Asistente de Sistemas</strong> | GICSA, S.A. (2004–2008) — Administración avanzada de ASPEL (SAE, COI, BANCO) y suite SICOSS / SUA.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="icon">🛠️</span> Habilidades Técnicas</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>💻 Lenguajes</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">ASP Classic</span>
+          <span class="skill-tag">ASP.NET</span>
+          <span class="skill-tag">Visual Basic</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">T-SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>📦 Frameworks</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Laravel</span>
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">jQuery</span>
+          <span class="skill-tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>🗄️ Bases de Datos</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">SQL Server</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MariaDB</span>
+          <span class="skill-tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>🖥️ Servidores & SO</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Windows Server</span>
+          <span class="skill-tag">Ubuntu</span>
+          <span class="skill-tag">RedHat</span>
+          <span class="skill-tag">CentOS</span>
+          <span class="skill-tag">Mac OS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>📡 Infraestructura</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Asterisk</span>
+          <span class="skill-tag">Issabel</span>
+          <span class="skill-tag">Vicidial</span>
+          <span class="skill-tag">Fortinet</span>
+          <span class="skill-tag">pfSense</span>
+          <span class="skill-tag">Cableado Cat 6</span>
+          <span class="skill-tag">Switches / Routers</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>📊 Sistemas Administrativos</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">ASPEL SAE</span>
+          <span class="skill-tag">ASPEL COI</span>
+          <span class="skill-tag">ASPEL BANCO</span>
+          <span class="skill-tag">ASPEL PROD</span>
+          <span class="skill-tag">SICOSS</span>
+          <span class="skill-tag">SUA</span>
+          <span class="skill-tag">Crystal Reports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="icon">🎓</span> Formación Académica</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="year">2006 – 2008</div>
+        <h3>Licenciatura en Informática</h3>
+        <p>Instituto Tecnológico Superior de la Sierra de Teziutlán</p>
+      </div>
+      <div class="edu-card">
+        <div class="year">2001 – 2004</div>
+        <h3>Profesional Técnico en Informática con Bachillerato</h3>
+        <p>CONALEP 153, Teziutlán, Puebla<br>Cédula Profesional: 4382086</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="icon">📜</span> Cursos y Actualizaciones</h2>
+    <div class="courses-list">
+      <div class="course-chip"><span class="year-chip">2021</span> Facturación Electrónica 4.0 — Carta Porte</div>
+      <div class="course-chip"><span class="year-chip">2019</span> Requerimientos complemento de pagos</div>
+      <div class="course-chip"><span class="year-chip">2018</span> Facturación Electrónica 3.3</div>
+      <div class="course-chip"><span class="year-chip">2016</span> Procesos CRM y MRP</div>
+      <div class="course-chip"><span class="year-chip">2012</span> Especialización en Suite ASPEL</div>
+      <div class="course-chip"><span class="year-chip">2006</span> Curso Técnico de SICOSS (FSN)</div>
+    </div>
+  </section>
+
+  <div class="contact-bar">
+    <p>📍 Disponible para proyectos freelance y oportunidades profesionales</p>
+    <p class="lang">🌐 Inglés: Intermedio (B1)</p>
+  </div>
+
+</body>
+</html>
